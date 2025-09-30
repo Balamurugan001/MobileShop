@@ -1,0 +1,97 @@
+.dashboard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.details{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1%;
+}
+
+.detail{
+  border-radius: 8px;
+  background-color: rgb(138, 121, 202);
+  text-align: center;
+  font-size: large;
+  font-weight: bolder;
+  margin: 10px;
+  padding: 15px;
+  min-width: 150px
+}
+
+p{
+  margin: 0px;
+}
+
+.charts{
+  display:flex; 
+  width: 100%;
+  justify-content: space-around;
+  gap: 2%;
+}
+
+.chart{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.pie{
+  width: 200px;
+}
+
+.bar{
+  width: 500px;
+}
+
+.cust{
+  height: 250px;
+}
+
+.two{
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .charts{
+    display:flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    justify-content: space-around;
+    gap: 2%;
+    align-self: center;
+    margin-top:10px
+  }
+
+  .chart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1%;
+  }
+
+  .pie, .bar{
+    width: 400px;
+  }
+  
+  .cust{
+    height: auto;
+  }
+}

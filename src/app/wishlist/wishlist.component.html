@@ -1,0 +1,27 @@
+<div class="cart-container">
+    <h2>{{"Wishlist"| translate}}</h2>
+    <div *ngIf="cartItems.length === 0" class="empty">
+      <img src="../../assets/images/empty-cart.jpg" alt="Empty Cart">
+      <h3>{{"Your cart is empty" | translate}}.<br> {{"Please add items" | translate}}</h3>
+    </div>
+  
+    <div *ngFor="let item of cartItems; let i = index" class="cart-item">
+     
+        <div class="product">
+          <p><strong>{{ item.name }}</strong></p>
+          <p>{{ item.price  | currency}}</p>
+        </div>
+        
+        <div class="quantity">
+          <button (click)="addWishlistToCart(item.id)">{{"Add to Cart" | translate}}</button>
+          
+        </div> 
+
+        <div>
+          <button  (click)="removeFromCart(item.id)" >{{"Remove" | translate}}</button>
+        </div>   
+        
+    </div>
+
+  </div>
+  

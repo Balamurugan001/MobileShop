@@ -1,0 +1,42 @@
+
+<div class="devicepage">
+  <h3>{{"Edit Device" | translate}}</h3>
+  <form (ngSubmit)="handleSubmit()">
+    <label>{{"Name" | translate}}:</label>
+    <input type="text" [(ngModel)]="item.name" name="name" required />
+  
+    <div *ngFor="let key of dataKeys">
+      <label>{{ key }}:</label>
+  
+      <input
+        *ngIf="isText(item.data[key])"
+        type="text"
+        [(ngModel)]="item.data[key]"
+        [name]="key"
+      />
+  
+      <input
+        *ngIf="isNumber(item.data[key])"
+        type="number"
+        [(ngModel)]="item.data[key]"
+        [name]="key"
+      />
+  
+      <input
+        *ngIf="isBoolean(item.data[key])"
+        type="checkbox"
+        [(ngModel)]="item.data[key]"
+        [name]="key"
+      />
+    </div>
+    <div class="btn">
+      <button (click)="handleClick()">{{"Back to Dashboard" | translate}}</button>
+      <button (click)="handleDelete()">{{"Delete" | translate}}</button>
+      <button type="submit">{{"Submit" | translate}}</button>
+    </div>
+    
+  </form>
+
+</div>  
+  
+  

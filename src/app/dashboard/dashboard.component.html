@@ -1,0 +1,79 @@
+<div  class="dashboard">
+
+
+  <div class="details">
+    <div class="two">
+      <div class="detail">
+        <p>{{"Total Revenue" | translate}}</p>
+        <p>{{totalRevenue | currency}}</p>
+      </div>
+      <div class="detail">
+        <p>{{'Total Orders' | translate}}</p>
+        <p>{{totalOrders}}</p>
+      </div>
+    </div>
+    <div class="two">
+      <div class="detail">
+        <p>{{"Delivered" | translate}}</p>
+        <p>{{totalDeliverd}}</p>
+      </div>
+      <div class="detail">
+        <p>{{"Cancelled" | translate}}</p>
+        <p>{{totalCancelled}}</p>
+      </div>
+    </div>
+    
+    <div class="detail">
+      <p>{{"Total Customers" | translate}}</p>
+      <p>{{totalCustomers}}</p>
+    </div>
+  </div>
+  <div class="main" >
+    <div class="charts">
+      
+      <div class="chart">
+  
+        <div class="bar">
+          <canvas baseChart
+                  [data]="lineChartData"
+                  [options]="lineChartOptions"
+                  chartType="line">
+          </canvas>
+        </div>    
+        <div class="pie">
+          <canvas baseChart
+            [datasets]="pieChartData"
+            [labels]="pieChartLabels"
+            [options]="pieChartOptions"
+            [type]="'pie'">
+          </canvas>
+        </div>
+  
+      </div>
+      <div class="chart">
+        
+        <div class="bar">
+          <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [type]="'bar'">
+          </canvas>
+        </div>  
+        <div class="bar cust">
+          <canvas baseChart
+            [datasets]="barChartCustomerData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [type]="'bar'">
+          </canvas>
+        </div>
+        
+      </div>
+      
+    
+    </div> 
+  </div>
+  
+  </div>
+  

@@ -1,0 +1,99 @@
+<!-- order-list.component.html -->
+<div class="orders">
+    <div>
+      <button class="btn" (click)="export()" >Export Excel</button>
+      <button class="btn" (click)="exportPdf()" >Export PDF</button>
+    </div>
+    
+    <h1>{{'Orders' | translate}}</h1>
+    <p *ngIf="orders.length==0"><img src="https://cdn.dribbble.com/users/1555425/screenshots/4811660/no_order_found.jpg?compress=1&resize=400x300" alt="No order"></p>
+    
+      
+  <div *ngIf="orders.length > 0" class="mat-elevation-z8">
+    
+      <div class="filter">
+        <form class="form" (ngSubmit)="search(formDetails)" #formDetails="ngForm"> 
+          <div class="sep">
+            <div class="input">
+              <label>From: </label>
+              <input type="date" name="from" ngModel>
+            </div>
+            <div class="input">
+                <label>To: </label>
+                <input type="date" name="to" ngModel>
+            </div>
+          </div>
+          <div class="sep">
+            <div>
+              <button class="btn" type="submit">{{"Search" | translate}}</button>
+            </div>
+            <div >
+              <button style="background-color: rgb(182, 15, 15);" class="btn" (click)=resetFilter() type="button">{{"Reset" | translate}}</button>
+          </div>
+          </div>
+            
+            
+        </form>
+      </div>
+
+    <mat-form-field class="search" >
+      <mat-label>{{"Filter" | translate}}</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search orders">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      
+      <ng-container matColumnDef="id" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >ID</th>
+        <td mat-cell *matCellDef="let order" (click)="goToOrderItem(order.id)" >
+          {{ order.id }}
+        </td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="date" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"Date" | translate}}</th>
+        <td mat-cell *matCellDef="let order" >{{ order.date | date }}</td>
+      </ng-container>
+
+      
+
+    
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"Price" | translate}}</th>
+        <td mat-cell *matCellDef="let order">
+          {{ order.price}}
+        </td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="action" >
+        <th mat-header-cell *matHeaderCellDef >{{"Action" | translate}}</th>
+        <td mat-cell *matCellDef="let order; let i = index">
+          
+          <button mat-button color="primary" [disabled]="auth!='admin'" (click)="ship(order.id)" *ngIf="order.status=='Ordered'">
+           {{auth=='admin'? "Ship": "Ordered"}}
+          </button>
+          <button mat-button color="primary" [disabled]="auth!='admin'" (click)="deliver(order.id)" *ngIf="order.status=='shipped'">
+            {{auth=='admin'? "Deliver": "Shipped"}}
+          </button>
+          <button mat-button color="primary" [disabled]="auth!='admin'" *ngIf="order.status=='Cancelled'  || order.status=='Delivered'">
+            {{order.status}}
+          </button>
+          <button mat-button color="warn" *ngIf="order.status=='shipped' || order.status=='Ordered'" (click)="cancelOrder(order.id)">
+            Cancel
+          </button>
+          <button  mat-button color="warn" (click)="reorder(order.id)"> Re-Order</button>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  <mat-paginator [pageSizeOptions]="[3, 5]" showFirstLastButtons></mat-paginator>
+</div>
+
+</div>

@@ -1,0 +1,24 @@
+<h2>Submit Feedback for ID: {{ id }}</h2>
+
+<form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>{{"Rating" | translate}}:</label>
+    <mat-icon
+        *ngFor="let star of stars; let i = index"
+        (click)="rate(i + 1)"
+        [class.filled]="i < rating">
+    {{ i < rating ? 'star' : 'star_border' }}
+    </mat-icon>
+
+    <div *ngIf="feedbackForm.get('rating')?.invalid && feedbackForm.get('rating')?.touched">
+      {{"Rating is required" | translate}}.
+    </div>
+  </div>
+
+  <div>
+    <label for="feedback">"{{"Feedback (optional)" | translate}}":</label>
+    <textarea id="feedback" formControlName="feedback"></textarea>
+  </div>
+
+  <button type="submit">{{"Submit" | translate}}</button>
+</form>

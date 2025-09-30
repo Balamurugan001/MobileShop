@@ -1,0 +1,18 @@
+<div class="whole">
+    <form class="container" (ngSubmit)="handleSubmit(formdata)" #formdata="ngForm"> 
+        <h1>{{'Login' | translate}} </h1>
+        <div>
+            <label for="email">{{'Email' | translate}}</label><br>
+            <input type="email" name="email" ngModel>
+        </div>
+        <div>
+            <label for="password">{{'Password' | translate}}</label><br>
+            <input type="password" min="8" name="password" ngModel>
+        </div>
+        <div class="btn">
+            <button type="submit"[disabled]="!formdata.valid" >{{"Submit" | translate}}</button>
+            <button (click)="goToRegister()" type="button">{{"Register" | translate}}</button>
+        </div>
+        
+    </form>
+</div>

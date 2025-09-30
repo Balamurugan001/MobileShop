@@ -1,0 +1,145 @@
+.homepage{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-self: center;
+    justify-self: center;
+}
+
+.exceptname{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 50%;
+}
+.heading{
+    width: 100%;
+    margin-left: 25%;
+}
+
+.user{
+    background-color: #B81F2D;
+    color: white;
+    border-radius: 8px;
+    padding: 5px;
+    
+}
+h1{
+    text-align: center;
+    width: 80%;
+    cursor: pointer;
+}
+
+
+
+h3{
+    margin-block-end: 8px;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: flex-end;
+    height: 30px;
+    margin: 50px 0px;
+    gap: 10px;
+    
+
+}
+
+@media (max-width: 768px) {
+    nav{
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+        height: 30px;
+        gap: 1px;
+    }
+
+    h1{
+        margin: 0%;
+    }
+
+    .exceptname{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 50%;
+    }
+}
+
+
+.cart{
+    display: flex;
+    gap:0px;
+}
+
+.cartNumber{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -25px;
+    background-color: #b86e1f;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    color: whitesmoke
+
+}
+
+li{
+    list-style-type: none;
+}
+
+.cartImage{
+    
+    height: 50px;
+}
+
+.settings{
+    height: 30px;
+    cursor: pointer;
+}
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+  
+.clickable-img {
+    width: 150px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 8px 0;
+    margin: 10px;
+    width: 150px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.dropdown-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f0f0f0;
+}
+
+.selectbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

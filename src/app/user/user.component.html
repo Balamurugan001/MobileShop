@@ -1,0 +1,36 @@
+<div class="wholePage">
+    <div>
+        <button (click)="export()" >Export Excel</button>
+        <button (click)="exportPdf()" >Export PDF</button>
+    </div>
+    
+    <h2>{{"Users" | translate}}</h2>
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>{{"Filter" | translate}}</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search items">
+      </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td *matCellDef="let item">{{item.userid}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"Name" | translate}}</th>
+            <td *matCellDef="let item">{{item.username}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>{{"Action"  | translate}}</th>
+            <td *matCellDef="let item"><button [ngStyle]="{'background-color':item.active? 'orange':'violet'}" (click)="toggle(item.userid)">{{item.active?'Disable':'Enable'}}</button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+
+        
+    </table> <hr>
+    <mat-paginator [pageSizeOptions]="[3, 5]" showFirstLastButtons></mat-paginator>
+    
+
+</div>

@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()" class="form-container">
+    <h2>{{"ADD DEVICE" | translate}}</h2>
+  
+    <div class="form-group">
+      <label for="name">{{"Name" | translate}}</label>
+      <input formControlName="name" id="name" placeholder="Enter name" />
+    </div>
+  
+    <div formGroupName="data" class="form-group">
+      <label>{{"Data Fields" | translate}}</label>
+      <!-- <div *ngFor="let field of data.controls; let i = index" [formGroupName]="i" class="field-row">
+        <input formControlName="key" placeholder="Key" />
+        <input formControlName="value" placeholder="Value" />
+        <button type="button" class="remove-btn" (click)="removeDataField(i)">Remove</button>
+      </div> -->
+      
+      <div class="field-row">
+        <label>{{"Color" | translate}}</label>
+        <input formControlName="color" placeholder="color">
+      </div>
+      <div class="field-row">
+        <label>{{"Price" | translate}}</label>
+        <input formControlName="price" placeholder="price">
+      </div>
+      <div class="field-row">
+        <label>{{"Capacity" | translate}}</label> 
+        <input formControlName="capacity" placeholder="capacity">
+      </div>
+        
+      
+    </div>
+  
+    <div class="button-group">
+      <!-- <button type="button" class="add-btn" (click)="addDataField()">Add Field</button> -->
+
+      <button type="button" class="add-btn"(click)="goToDashboard()" >{{"Back To Dashboard" | translate}}</button>
+      <button type="submit" class="submit-btn">{{"Submit" | translate}}</button>
+    </div>
+  </form>
+  

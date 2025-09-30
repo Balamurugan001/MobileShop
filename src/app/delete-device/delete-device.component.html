@@ -1,0 +1,47 @@
+<div class="wholePage">
+    <div>
+        <button (click)="export()">Export Excel</button>
+        <button (click)="exportPdf()" >Export PDF</button>
+    </div>
+    
+    <h2>Products</h2>
+
+    <div class="filterbtn">
+        
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>{{"Filter" | translate}}</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search items">
+            </mat-form-field>
+        
+        <div>
+            <button class="add" (click)="addDevice()">{{"Add Device" | translate}}</button>
+        </div>
+        
+
+    </div>
+    
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td *matCellDef="let item" (click)="editDevice(item.id)">{{item.id}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{"Name" | translate}}</th>
+            <td *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>{{"Action" | translate}}</th>
+            <td *matCellDef="let item"><div class="btn"><button (click)="editDevice(item.id)">{{'Edit' | translate}}</button><button (click)="delete(item.id)">{{"Delete" | translate}}</button></div></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+
+        
+    </table> <hr>
+    <mat-paginator [pageSizeOptions]="[3, 5]" showFirstLastButtons></mat-paginator>
+    
+
+</div>

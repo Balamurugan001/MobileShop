@@ -1,0 +1,38 @@
+
+button{
+    margin: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #7373D8;
+    color: white;
+    width: 150px;
+
+}
+
+.wholePage{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+}
+
+mat-paginator{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .wholePage{
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        justify-self: center;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+    }
+}

@@ -1,0 +1,31 @@
+<div class="addressPage">
+    <form (ngSubmit)="handleSubmit(formdetails)" #formdetails="ngForm" >
+        <h3>{{"Details" | translate}}</h3>
+        <div class="flexItem">
+            <label>{{"Mobile No" | translate}}</label>
+            <input type="tel" name="phone" ngModel>
+        </div>
+        <div class="flexItem">
+            <label>{{"E-mail" | translate}}</label>
+            <input type="email" name="email" ngModel>
+        </div>
+        <div class="flexItem">
+            <label>{{"Address" | translate}}</label>
+            
+            <div class="add" >
+                <textarea *ngIf="displayAddress"  name="add" ngModel></textarea>
+                <select *ngIf="!displayAddress" name="add" ngModel>
+                    <option *ngFor="let loc of address" [value]="loc">{{loc}}</option>
+                </select>
+                <button type="button" *ngIf="displayAddress" (click)="displayTextarea()" >{{"Saved Address" | translate}}</button>
+                <button type="button" *ngIf="!displayAddress" (click)="displayTextarea()" >{{"New Address" | translate}}</button>
+
+            </div>
+            
+        </div>
+        <div class="flexbtn">
+            <button type="submit">{{"Submit" | translate}}</button>
+        </div>
+
+    </form>
+</div>

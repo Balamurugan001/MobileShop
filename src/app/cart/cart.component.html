@@ -1,0 +1,34 @@
+<div class="cart-container">
+    <h2>{{"Your Cart"| translate}}</h2>
+    <div *ngIf="cartItems.length === 0" class="empty">
+      <img src="../../assets/images/empty-cart.jpg" alt="Empty Cart">
+      <h3>{{"Your cart is empty" | translate}}.<br> {{"Please add items" | translate}}</h3>
+    </div>
+  
+    <div *ngFor="let item of cartItems; let i = index" class="cart-item">
+     
+        <div class="product">
+          <p><strong>{{ item.name }}</strong></p>
+          <p>{{ item.price  | currency}}</p>
+        </div>
+        
+        <div class="quantity">
+          <button (click)="increaseQuantity(item.id)">+</button>
+          <p>{{ item.quantity }}</p>
+          <button (click)="decreaseQuantity(item.id)">-</button>
+        </div>
+      
+        
+        <div>
+          <button  (click)="removeFromCart(item.id)" >{{"Remove" | translate}}</button>
+        </div>
+        
+        
+    </div>
+  
+    <div class="cart-total" *ngIf="cartItems.length > 0">
+      <h3>Total:{{calculateTotal() | currency}}</h3>
+      <button (click) = "checkout()">{{"Proceed to Checkout" | translate}}</button>
+    </div>
+  </div>
+  

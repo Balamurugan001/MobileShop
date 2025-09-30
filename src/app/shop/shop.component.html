@@ -1,0 +1,38 @@
+<div class="homepage">  
+    <div style="background-image: url({{images[img]}});background-size:contain ;" class="carousel">
+      <span (click)="prev()" class="carouselMove">{{"<"}}</span>
+      <span (click)="next()" class="carouselMove">{{">"}}</span>
+    </div>
+
+    <div class="inputbox">
+        <input type="text" name="search" placeholder="Search Mobiles..." 
+            [(ngModel)]="search" (ngModelChange)="searchDevice($event)" >
+    </div>
+    
+    <ul class="mobilelist">
+      <li  class="listwithbtn" *ngFor="let mobile of Mobiles" >
+        <div class="mobilelistitem" (click)="handleClick(mobile.id)"  >
+          <img src="../../assets/images/download.webp"  alt="Device Image">
+          <p class="heading">{{mobile.name}}</p>
+          <ul class="featurelist">
+            <li class="feature" *ngFor="let feature of mobile.data | keyvalue">{{feature.key}} : {{feature.value}}</li> 
+          </ul>
+        </div>
+        <div class="bottombtns" >
+          <img (click)="deleteDevice(mobile.id)" class="btn del" *ngIf="auth=='admin';else addtocart" src="../../assets/images/delete.webp" alt="delete icon">
+          <ng-template #addtocart>
+            <button *ngIf="isInWishlist(mobile.id);else normal" class="btn btn2" type="button" (click)="goToWishlist()">{{"Go to Wishlist" | translate}}</button>
+            <ng-template #normal>
+              <button class="btn" type="button" (click)="addToWishlist(mobile.id)">{{"Buy Later" | translate}}</button>
+            </ng-template>  
+            <button *ngIf="isInCart(mobile.id);else normalContent" class="btn btn2" type="button" (click)="goToCart()">{{"Go to Cart" | translate}}</button>
+            <ng-template #normalContent>
+              <button class="btn" type="button" (click)="addToCart(mobile.id)">{{"Add to Cart" | translate}}</button>
+            </ng-template>  
+          </ng-template>
+        </div>
+        
+      </li>
+    </ul>
+</div>
+  
