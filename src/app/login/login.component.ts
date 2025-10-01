@@ -93,6 +93,7 @@ export class LoginComponent {
         const orders = localStorage.getItem("orders")
         if(orders!=null){
           this.dataService.setOrderItem(JSON.parse(orders))
+          this.dataService.setUserId(login.userid)
         }
         else{
           this.dataService.setOrderItem([])

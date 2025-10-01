@@ -40,6 +40,7 @@ export class ShopComponent {
       this.cartItems=data;
     })
     
+    this.dataService.currentWishlist.subscribe(data=> this.wishlist = data)
     
   }
   handleClick(id:any):void{

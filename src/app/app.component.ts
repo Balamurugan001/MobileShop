@@ -17,6 +17,7 @@ export class AppComponent implements OnInit{
 
   title = 'MobileShop';
   isAdmin:boolean = true;
+  isUserId:any = 0;
   name:string="";
   updated:any;
   cartItems:any[]=[];
@@ -42,6 +43,8 @@ export class AppComponent implements OnInit{
     this.dataService.currentWishlist.subscribe(data=>{
       this.wishlistItems = data;
     })
+
+    this.dataService.userId.subscribe(data=> this.isUserId = data)
   }
 
   toggleControl():void{
@@ -49,6 +52,7 @@ export class AppComponent implements OnInit{
     else{
       this.isAdmin=false;
       this.auth="none"
+      this.dataService.setUserId(0);
       this.dataService.setData(false)
       this.router.navigateByUrl("")
     
@@ -65,7 +69,7 @@ export class AppComponent implements OnInit{
 
 
   goToOrders(){
-    if(this.isAdmin)  this.router.navigateByUrl("/orders")
+    if(this.isAdmin)  this.router.navigateByUrl("/orders/"+this.isUserId)
   }
 
   toggleDropdown() {

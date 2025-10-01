@@ -2,7 +2,7 @@ import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DataService } from '../data.service';
 import { ExportService } from '../export.service';
@@ -19,12 +19,15 @@ export class OrdersComponent implements OnInit {
 
 
 
+
 displayedColumns:string[] = ["id","date","price","action"]
 
 auth!:string;
+user!:any;
+userId!:any;
 orders: any[] = [];
 
-constructor(private dataService: DataService,private router:Router,private exportService:ExportService) {}
+constructor(private dataService: DataService,private router:Router,private exportService:ExportService,private route:ActivatedRoute) {}
 
 @ViewChild(MatPaginator) paginator!: MatPaginator;
 @ViewChild(MatSort) sort!: MatSort;
@@ -38,13 +41,20 @@ ngAfterViewInit() {
 
 
 ngOnInit(): void {
+
+  this.userId= this.route.snapshot.paramMap.get("id")
+
   this.dataService.orders.subscribe(data => {
     this.orders = data
     this.orders.sort(item=> item.id)
-    this.dataSource = new MatTableDataSource(this.orders);
     
+    if(this.userId!=0){
+      this.orders = this.orders.filter(item=>item.userId==this.userId)
+    }
+    this.dataSource = new MatTableDataSource(this.orders);
   });
 
+  this.dataService.auth.subscribe(data=>{this.user = data})
   this.dataService.auth.subscribe(data=>this.auth=data)
   
 }
@@ -143,6 +153,7 @@ reorder(id:any){
   const oldOrder = this.orders.find(item => item.id==id)
   const newOrder = {
     id: this.orders.length+1,
+    userId:this.user,
     date: new Date(),
     data: oldOrder.data,
     status:"Ordered",

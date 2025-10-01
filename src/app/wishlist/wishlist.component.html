@@ -12,9 +12,8 @@
           <p>{{ item.price  | currency}}</p>
         </div>
         
-        <div class="quantity">
-          <button (click)="addWishlistToCart(item.id)">{{"Add to Cart" | translate}}</button>
-          
+        <div>
+          <button style="background-color: blue;"     (click)="addWishlistToCart(item.id)">{{"Add to Cart" | translate}}</button>
         </div> 
 
         <div>

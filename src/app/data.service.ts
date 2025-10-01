@@ -27,6 +27,9 @@ export class DataService {
   private loggedPerson = new BehaviorSubject<string>("none");
   auth = this.loggedPerson.asObservable()
 
+  private loggedUser = new BehaviorSubject<any>(0);
+  userId = this.loggedUser.asObservable()
+
   private feedback = new BehaviorSubject<any>({});
   rating = this.feedback.asObservable();
 
@@ -54,6 +57,10 @@ export class DataService {
 
   setAuth(value:string){
     this.loggedPerson.next(value)
+  }
+
+  setUserId(value:any){
+    this.loggedUser.next(value);
   }
 
   setRating(value:any){

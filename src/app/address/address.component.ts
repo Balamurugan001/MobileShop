@@ -14,11 +14,14 @@ export class AddressComponent implements OnInit {
   orderItem!:any[]
   address:any[] = []
   displayAddress:boolean =false
+  user!:any;
 
   ngOnInit(): void {
     this.dataService.orders.subscribe((data)=>{
       this.order = data
     })
+
+    this.dataService.userId.subscribe((data)=>{this.user = data})
     const ad = localStorage.getItem("address")
     if(ad!=null)  this.address =JSON.parse(ad) 
 
@@ -43,6 +46,7 @@ export class AddressComponent implements OnInit {
 
     const val = {
       id: this.order.length+1,
+      userId: this.user,
       date: new Date(),
       data: this.orderItem,
       status:"Ordered",
