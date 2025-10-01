@@ -13,18 +13,22 @@ export class AddressComponent implements OnInit {
   order!:any[]
   orderItem!:any[]
   address:any[] = []
-  displayAddress:boolean =false
+  displayAddress!:boolean; 
   user!:any;
+  users!:any[];
 
   ngOnInit(): void {
     this.dataService.orders.subscribe((data)=>{
       this.order = data
     })
-
-    this.dataService.userId.subscribe((data)=>{this.user = data})
-    const ad = localStorage.getItem("address")
-    if(ad!=null)  this.address =JSON.parse(ad) 
-
+    this.dataService.userId.subscribe((data)=>{
+      this.user = data
+      const userList = localStorage.getItem("userList")
+      if(userList!=null)  this.users =JSON.parse(userList) 
+      this.address = this.users.find(item => item.userid==this.user)?.address;
+      this.displayAddress = this.address.length<1;
+    })
+    
   }
 
   constructor(private router:Router, private dataService:DataService){}
@@ -57,10 +61,12 @@ export class AddressComponent implements OnInit {
     const newAdd =form.controls.add.value;
     if(newAdd!=undefined && newAdd!=null){
       if (!this.address.includes(newAdd)) {
-        this.address.push(newAdd);
+        const add = this.users.find(item=> item.userid==this.user)?.address;
+        add.push(newAdd)
+        
       }
-    }
-    localStorage.setItem("address",JSON.stringify(this.address))
+    }   
+    localStorage.setItem("userList",JSON.stringify(this.users))
     
 
     localStorage.setItem("orders",JSON.stringify(this.order))

@@ -84,7 +84,7 @@
           <button mat-button color="warn" *ngIf="order.status=='shipped' || order.status=='Ordered'" (click)="cancelOrder(order.id)">
             Cancel
           </button>
-          <button  mat-button color="warn" (click)="reorder(order.id)"> Re-Order</button>
+          <button  mat-button color="warn" *ngIf="auth!='admin'" (click)="reorder(order.id)"> Re-Order</button>
 
         </td>
       </ng-container>

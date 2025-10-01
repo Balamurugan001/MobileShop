@@ -25,6 +25,7 @@ displayedColumns:string[] = ["id","date","price","action"]
 auth!:string;
 user!:any;
 userId!:any;
+totalOrders:any[] = [];
 orders: any[] = [];
 
 constructor(private dataService: DataService,private router:Router,private exportService:ExportService,private route:ActivatedRoute) {}
@@ -45,12 +46,11 @@ ngOnInit(): void {
   this.userId= this.route.snapshot.paramMap.get("id")
 
   this.dataService.orders.subscribe(data => {
-    this.orders = data
+    this.totalOrders = data
+    this.orders = this.getOrders();
     this.orders.sort(item=> item.id)
     
-    if(this.userId!=0){
-      this.orders = this.orders.filter(item=>item.userId==this.userId)
-    }
+    
     this.dataSource = new MatTableDataSource(this.orders);
   });
 
@@ -60,6 +60,12 @@ ngOnInit(): void {
 }
 
 
+getOrders():any[]{
+  if(this.userId!=0){
+    return this.totalOrders.filter(item=>item.userId==this.userId)
+  }
+  return this.totalOrders
+}
 
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
@@ -153,17 +159,17 @@ reorder(id:any){
   const oldOrder = this.orders.find(item => item.id==id)
   const newOrder = {
     id: this.orders.length+1,
-    userId:this.user,
+    userId:this.userId,
     date: new Date(),
     data: oldOrder.data,
     status:"Ordered",
     price: oldOrder.price
   }
-  this.orders.push(newOrder);
+  this.totalOrders.push(newOrder);
 
-  localStorage.setItem("orders",JSON.stringify(this.orders))
-  this.dataService.setOrderItem(this.orders);
-
+  localStorage.setItem("orders",JSON.stringify(this.totalOrders))
+  this.dataService.setOrderItem(this.totalOrders);
+  this.orders = this.getOrders();
   this.dataSource = new MatTableDataSource(this.orders)
   this.dataSource.paginator = this.paginator;
   this.dataSource.sort = this.sort;

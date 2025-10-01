@@ -51,7 +51,8 @@ export class RegisterComponent {
       username: this.username,
       password: this.password,
       registeredAt: new Date().toISOString(),
-      active: true
+      active: true,
+      address: []
     };
     this.users.push(newUser);
     localStorage.setItem('userList', JSON.stringify(this.users));
